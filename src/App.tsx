@@ -90,9 +90,15 @@ function WalletBalance({ ...props }) {
       <div className="text-3xl font-bold">SMPL {walletCtx.wallet.balance}</div>
       <div>
         <button className="bg-blue-800 text-sm rounded-md px-3 py-2 font-semibold shadow-sm text-white">Buy</button>
+        <button className="bg-blue-800 text-sm rounded-md px-3 py-2 font-semibold shadow-sm text-white">Sell</button>
+        <button className="bg-blue-800 text-sm rounded-md px-3 py-2 font-semibold shadow-sm text-white">Transfer</button>
       </div>
     </div>
   );
+}
+
+function WalletTransactions() {
+  
 }
 
 function App() {
