@@ -1,21 +1,22 @@
-import { ReactElement, createContext, useEffect, useState } from "react";
+import { ReactElement, createContext, useEffect, useState } from 'react';
 import _cloneDeep from 'lodash.clonedeep';
 
 interface IWallet {
     address: string;
     privateKey: string;
-    balance: 0;
+    balance: number;
 }
 
 const defaultWallet: IWallet = {
     address: '',
     privateKey: '',
-    balance: 0
+    balance: 0,
 };
 
 const WalletContext = createContext({
     wallet: _cloneDeep(defaultWallet),
-    addWallet: (newWallet: IWallet) => {}
+    addWallet: (newWallet: IWallet) => {},
+    setBalance: (amount: number) => {},
 });
 
 const WalletContextProvider = ({ children }: { children: ReactElement }) => {
@@ -33,13 +34,17 @@ const WalletContextProvider = ({ children }: { children: ReactElement }) => {
         setWallet(newWallet);
 
         localStorage.setItem('simple-wallet', JSON.stringify(newWallet));
-    }
+    };
+
+    const setBalance = (balance: number) => {
+        setWallet({ ...wallet, balance });
+    };
 
     return (
-        <WalletContext.Provider value={{ wallet, addWallet }}>
+        <WalletContext.Provider value={{ wallet, addWallet, setBalance }}>
             {children}
         </WalletContext.Provider>
-    )
-}
+    );
+};
 
 export { WalletContext, WalletContextProvider };
