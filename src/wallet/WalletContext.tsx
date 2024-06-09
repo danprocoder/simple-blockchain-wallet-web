@@ -31,6 +31,8 @@ const WalletContextProvider = ({ children }: { children: ReactElement }) => {
 
     const addWallet = (newWallet: IWallet) => {
         setWallet(newWallet);
+
+        localStorage.setItem('simple-wallet', JSON.stringify(newWallet));
     }
 
     return (
